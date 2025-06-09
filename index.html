@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .book {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .title {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список книг</h1>
+    <div id="book-list">Загрузка...</div>
+
+    <script>
+        async function fetchBooks() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/books'); // предполагается эндпоинт /books
+                if (!response.ok) throw new Error('Ошибка при загрузке книг');
+
+                const books = await response.json();
+                const bookList = document.getElementById('book-list');
+                bookList.innerHTML = '';
+
+                books.forEach(book => {
+                    const div = document.createElement('div');
+                    div.className = 'book';
+                    div.innerHTML = `
+                        <div class="title">${book.title}</div>
+                        <div class="author">Автор: ${book.author}</div>
+                    `;
+                    bookList.appendChild(div);
+                });
+            } catch (error) {
+                document.getElementById('book-list').innerText = 'Ошибка загрузки данных: ' + error.message;
+            }
+        }
+
+        fetchBooks();
+    </script>
+</body>
+</html>
