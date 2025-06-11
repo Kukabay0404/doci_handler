@@ -1,34 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Регистрация</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Регистрация</h2>
-    <form id="register-form">
-        <input type="email" name="email" placeholder="Email" required><br>
-        <input type="password" name="password" placeholder="Пароль" required><br>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body p-5">
+            <h2 class="card-title text-center mb-4">Регистрация</h2>
+            <form id="register-form">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        document.getElementById("register-form").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const data = {
-                email: form.email.value,
-                password: form.password.value
-            };
-
-            const response = await fetch("/auth/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            alert(result.detail || "Успешная регистрация");
-        });
-    </script>
+  <script>
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const response = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email.value,
+          password: form.password.value
+        })
+      });
+      
+      if (response.ok) {
+        alert("Успешно зарегестрировались!");
+        window.location.href = "/";
+      } else {
+        const error = await response.json();
+        alert(error.detail || "Ошибка регистрации");
+      }
+    });
+  </script>
 </body>
 </html>

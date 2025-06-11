@@ -5,3 +5,12 @@ class ApplicationData(BaseModel):
     full_name : str
     position : str
     date : str
+
+
+class VacationData(BaseModel):
+    supervisor : str
+    full_name : str
+    reason : str
+    date_from : str
+    date_till : str
+

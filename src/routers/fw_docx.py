@@ -1,24 +1,83 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
-from src.schemas.f_docx import ApplicationData
-from src.crud.f_docx import generate_document
+from src.schemas.f_docx import ApplicationData, VacationData
+from src.crud.f_docx import generate_application_document, generate_vacation_document
 import os
 from src.utils.templates import templates
 
 doc_router = APIRouter(
-    prefix='/docs',
+    prefix='/forms',
     tags=['Documents']
 )
 
-@doc_router.get("/generate", response_class=HTMLResponse)
-async def get_register(request: Request):
+@doc_router.get("/manual_forms", response_class=HTMLResponse)
+async def get_manual_forms(request: Request):
     return templates.TemplateResponse("form.html", {"request": request})
 
-@doc_router.post('/generate')
+@doc_router.get("/application_document", response_class=HTMLResponse)
+async def get_application_form(request: Request):
+    return templates.TemplateResponse("forms/application_form.html", {"request": request})
+
+@doc_router.post('/job-application')
 def generate_doc(data : ApplicationData):
-    file_name = generate_document(data.model_dump())
+    file_name = generate_application_document(data.model_dump())
     return {'document generated' : file_name}
+
+
+@doc_router.get("/vacation-form", response_class=HTMLResponse)
+async def get_application_form(request: Request):
+    return templates.TemplateResponse("forms/form_vacation.html", {"request": request})
+
+@doc_router.post('/vacation-form')
+def generate_doc(data : VacationData):
+    file_name = generate_vacation_document(data.model_dump())
+    return {'document generated' : file_name}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @doc_router.get('/download/{document_name}')
 def download_doc(document_name : str):

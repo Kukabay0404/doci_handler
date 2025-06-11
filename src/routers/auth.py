@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import HTMLResponse
-from src.schemas.user import UserCreate, UserRead
+from src.schemas.user import UserCreate, UserRead, UserLogin
 from src.database import get_session
 from src.crud import user as user_crud
 from src.auth.hash import verify_password
@@ -28,12 +28,9 @@ async def get_register(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 @router.post('/login')
-async def login(
-        form_data : OAuth2PasswordRequestForm = Depends(),
-        db : AsyncSession = Depends(get_session)
-):
-    user = await user_crud.get_user_by_email(form_data.username, db)
-    if not user or not verify_password(form_data.password, user.hashed_password):
+async def login(data: UserLogin, db: AsyncSession = Depends(get_session)):
+    user = await user_crud.get_user_by_email(data.email, db)
+    if not user or not verify_password(data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail='Неверные email или пароль')
     token = create_access_token({'sub' : str(user.id)})
     return {'access_token' : token, 'token_type' : 'bearer'}
