@@ -1,8 +1,9 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
-from src.schemas.f_docx import ApplicationData, VacationData
-from src.crud.f_docx import generate_application_document, generate_vacation_document
+from src.schemas.f_docx import ApplicationData, VacationData, DismissalData, TransferData
+from src.crud.f_docx import generate_application_document, generate_vacation_document, generate_dismissal_document, \
+    generate_transfer_document
 import os
 from src.utils.templates import templates
 
@@ -35,6 +36,24 @@ def generate_doc(data : VacationData):
     return {'document generated' : file_name}
 
 
+@doc_router.get("/dismissal-form", response_class=HTMLResponse)
+async def get_application_form(request: Request):
+    return templates.TemplateResponse("forms/dismissal_form.html", {"request": request})
+
+@doc_router.post('/dismissal-form')
+def generate_doc(data : DismissalData):
+    file_name = generate_dismissal_document(data.model_dump())
+    return {'document generated' : file_name}
+
+
+@doc_router.get("/transfer-form", response_class=HTMLResponse)
+async def get_application_form(request: Request):
+    return templates.TemplateResponse("forms/transfer_form.html", {"request": request})
+
+@doc_router.post('/transfer-form')
+def generate_doc(data : TransferData):
+    file_name = generate_transfer_document(data.model_dump())
+    return {'document generated' : file_name}
 
 
 

@@ -14,3 +14,14 @@ class VacationData(BaseModel):
     date_from : str
     date_till : str
 
+
+class DismissalData(ApplicationData):
+    reason : str
+
+
+class TransferData(ApplicationData):
+    department_1 : str
+    department_2 : str
+
+
+

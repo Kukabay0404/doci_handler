@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Заявление на увольнение</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card shadow">
+          <div class="card-body">
+            <h4 class="mb-4">Заявление на увольнение</h4>
+            <form id="dismissal-form">
+              <div class="mb-3">
+                <label for="employer_name" class="form-label">Кому (ФИО руководителя)</label>
+                <input type="text" class="form-control" id="employer_name" name="employer_name" required>
+              </div>
+              <div class="mb-3">
+                <label for="full_name" class="form-label">ФИО сотрудника</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label">Должность</label>
+                <input type="text" class="form-control" id="position" name="position" required>
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Дата увольнения</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+              </div>
+              <div class="mb-3">
+                <label for="reason" class="form-label">Причина увольнения</label>
+                <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Отправить заявление</button>
+              <a href="/forms" class="btn btn-secondary">Назад</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  document.getElementById("dismissal-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      employer_name: e.target.employer_name.value,
+      full_name: e.target.full_name.value,
+      position: e.target.position.value,
+      date: e.target.date.value,
+      reason: e.target.reason.value
+    };
+
+    const response = await fetch("/forms/dismissal-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      alert("Заявление успешно отправлено!");
+      window.location.href = "/forms/manual_forms";
+    } else {
+      const error = await response.json();
+      alert(error.detail || "Ошибка при отправке формы.");
+    }
+  });
+</script>
+
+</body>
+</html>

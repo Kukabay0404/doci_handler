@@ -12,14 +12,14 @@
         <div class="card shadow">
           <div class="card-body">
             <h4 class="mb-4">Заявление на отпуск</h4>
-            <form method="post">
+            <form id="vacation-form">
               <div class="mb-3">
-                <label for="employer_name" class="form-label">Кому (ФИО руководителя)</label>
-                <input type="text" class="form-control" id="employer_name" name="employer_name" required>
+                <label for="supervisor" class="form-label">Кому (ФИО руководителя)</label>
+                <input type="text" class="form-control" id="supervisor" name="supervisor" required>
               </div>
               <div class="mb-3">
-                <label for="name" class="form-label">ФИО</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <label for="full_name" class="form-label">ФИО</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
               </div>
               <div class="mb-3">
                 <label for="reason" class="form-label">Причина</label>
@@ -27,11 +27,11 @@
               </div>
               <div class="mb-3">
                 <label for="date_from" class="form-label">Дата начала</label>
-                <input type="date" class="form-control" id="date_from" name="date_from">
+                <input type="date" class="form-control" id="date_from" name="date_from" required>
               </div>
               <div class="mb-3">
-                <label for="date_to" class="form-label">Дата окончания</label>
-                <input type="date" class="form-control" id="date_to" name="date_to">
+                <label for="date_till" class="form-label">Дата окончания</label>
+                <input type="date" class="form-control" id="date_till" name="date_till" required>
               </div>
               <button type="submit" class="btn btn-primary">Отправить</button>
               <a href="/forms" class="btn btn-secondary">Назад</a>
@@ -43,31 +43,34 @@
   </div>
 
 <script>
-    document.getElementById("vacation-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  document.getElementById("vacation-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const data = {
-        supervisor: e.target.supervisor.value,
-        full_name: e.target.full_name.value,
-        reason: e.target.reason.value,
-        date_from: e.target.date_from.value
-        date_till: e.target.date_till.value
-      };
+    const form = e.target;
 
-      const response = await fetch("/forms/vacation-form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
+    const data = {
+      supervisor: form.supervisor.value,
+      full_name: form.full_name.value,
+      reason: form.reason.value,
+      date_from: form.date_from.value,
+      date_till: form.date_till.value
+    };
 
-      if (response.ok) {
-        alert("Заявление успешно отправлено!");
-        window.location.href = "/manual_forms";
-      } else {
-        const error = await response.json();
-        alert(error.detail || "Ошибка при отправке формы.");
-      }
+    const response = await fetch("/forms/vacation-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
-  </script>
+
+    if (response.ok) {
+      alert("Заявление успешно отправлено!");
+      window.location.href = "/forms/manual_forms";
+    } else {
+      const error = await response.json();
+      alert(error.detail || "Ошибка при отправке формы.");
+    }
+  });
+</script>
+
 </body>
 </html>
