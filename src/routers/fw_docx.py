@@ -1,9 +1,10 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Request
+from fastapi import APIRouter, UploadFile, File, HTTPException, Request, BackgroundTasks
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
+
 from src.schemas.f_docx import ApplicationData, VacationData, DismissalData, TransferData
-from src.crud.f_docx import generate_application_document, generate_vacation_document, generate_dismissal_document, \
-    generate_transfer_document
+from src.crud.f_docx import (generate_application_document, generate_vacation_document, generate_dismissal_document,
+                             generate_transfer_document)
 import os
 from src.utils.templates import templates
 
@@ -21,9 +22,9 @@ async def get_application_form(request: Request):
     return templates.TemplateResponse("forms/application_form.html", {"request": request})
 
 @doc_router.post('/job-application')
-def generate_doc(data : ApplicationData):
-    file_name = generate_application_document(data.model_dump())
-    return {'document generated' : file_name}
+def generate_doc(data : ApplicationData, background_task : BackgroundTasks):
+    background_task.add_task(generate_application_document, data.model_dump(), 'templates/application_template.docx')
+    return {'document generated' : 'Документ создан, посмотри'}
 
 
 @doc_router.get("/vacation-form", response_class=HTMLResponse)

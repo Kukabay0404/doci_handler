@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99ca8ad8-3ca1-430b-8038-f9a1a7ad640e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/fr_files/forms/transfer_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/Абулаис.docx" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer_template.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc.db" beforeDir="false" afterPath="$PROJECT_DIR$/doc.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/documents/Айбек.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fr_files/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fr_files/forms/form_vacation.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/forms/form_vacation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/Олжас_Аязбаев.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/Приходько_Павел.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fr_files/forms/application_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/forms/application_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/deps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/crud/f_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crud/f_docx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/crud/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crud/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/fw_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/fw_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemas/f_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/f_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vacation_application.docx" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vacation_template.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schemas/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

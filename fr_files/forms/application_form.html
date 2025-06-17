@@ -62,7 +62,7 @@
 
       if (response.ok) {
         alert("Заявление успешно отправлено!");
-        window.location.href = "/manual_forms";
+        window.location.href = "/forms/manual_forms";
       } else {
         const error = await response.json();
         alert(error.detail || "Ошибка при отправке формы.");

@@ -1,4 +1,5 @@
 from docxtpl import DocxTemplate
+from docx2pdf import convert
 import re
 import os
 
@@ -17,6 +18,7 @@ def generate_application_document(data : dict,  template_path : str = 'templates
     output_path = os.path.join('documents', file_name)
     doc.save(output_path)
 
+    convert(f"documents/{file_name}", f"documents/{full_name}.pdf")
     return {'file' : file_name}
 
 def generate_vacation_document(data : dict,  template_path : str = 'templates/vacation_template.docx'):

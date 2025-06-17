@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse
 from src.routers import auth
 from src.routers import users
 from src.routers import fw_docx
+from src.routers import admin
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title='Электронный документ хэндлер')
@@ -19,6 +20,7 @@ app.add_middleware(
 app.include_router(fw_docx.doc_router)
 app.include_router(auth.router)
 app.include_router(users.router)
+app.include_router(admin.router)
 
 @app.get('/', response_class=HTMLResponse)
 async def read_index(request : Request):

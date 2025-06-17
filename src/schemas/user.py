@@ -1,10 +1,15 @@
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 
 class UserCreate(BaseModel):
     email: EmailStr
     password : str
 
+class CreateAdmin(BaseModel):
+    email: EmailStr
+    password : str
+    is_admin: Optional[bool] = 0
 
 class UserRead(BaseModel):
     id : int
