@@ -7,18 +7,11 @@
     <list default="true" id="99ca8ad8-3ca1-430b-8038-f9a1a7ad640e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc.db" beforeDir="false" afterPath="$PROJECT_DIR$/doc.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/Айбек.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/Олжас_Аязбаев.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/Приходько_Павел.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fr_files/forms/application_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/forms/application_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/deps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crud/f_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crud/f_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crud/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crud/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fr_files/admin/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/admin/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fr_files/login-admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/login-admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/fw_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/fw_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemas/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,8 +63,8 @@
       <recent name="A:\test\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="A:\test\fr_files\forms" />
       <recent name="A:\test\fr_files" />
+      <recent name="A:\test\fr_files\forms" />
     </key>
   </component>
   <component name="SharedIndexes">

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -59,7 +60,7 @@
       <!-- Основной контент -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
         <h1 class="h2">Дашборд</h1>
-        
+
         <!-- Статистика -->
         <div class="row mt-4">
           <div class="col-md-4">
@@ -125,8 +126,9 @@
 
   <script>
     // Загрузка статистики - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ С РАБОТАЮЩИМ API
+    /*
     async function loadStats() {
-      const response = await fetch('/admin/dashboard', {
+      const response = await fetch('/admin/stats', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();
@@ -149,10 +151,10 @@
       });
       document.getElementById('recent-docs').innerHTML = html;
     }
-
+    */
 
     // Проверка прав при загрузке - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ
-
+    /*
     async function checkAdmin() {
       try {
         const response = await fetch('/admin/check', {
@@ -163,11 +165,13 @@
         window.location.href = '/auth/login';
       }
     }
-
+    */
 
     // Инициализация - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ
+    /*
     checkAdmin();
     loadStats();
+    */
 
     // Демо-данные для просмотра
     document.addEventListener('DOMContentLoaded', () => {

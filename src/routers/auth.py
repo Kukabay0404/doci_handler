@@ -7,6 +7,7 @@ from src.crud import user as user_crud
 from src.auth.hash import verify_password
 from src.auth.jwt_handler import create_access_token
 from src.utils.templates import templates
+from src.auth.deps import admin_required
 
 router = APIRouter(prefix='/auth', tags=['Auth'])
 

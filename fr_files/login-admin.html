@@ -13,7 +13,7 @@
         <div class="card shadow">
           <div class="card-body p-5">
             <h2 class="card-title text-center mb-4">Вход в систему</h2>
-            <form id="login-form">
+            <form id="login-form" method="post" action="#">
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control" id="email" name="email" required>
@@ -36,6 +36,7 @@
     document.getElementById("login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
+
       const response = await fetch("/auth/login-admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,14 +46,22 @@
         })
       });
 
+      let data;
+      try {
+        data = await response.json();
+      } catch (err) {
+        alert("Ошибка обработки ответа сервера");
+        return;
+      }
+
       if (response.ok) {
-        document.cookie = `access_token=${data.access_token}; path=/`;
-        window.location.href = "/admin/dashboard";
+        localStorage.setItem("token", data.access_token);  // сохранение токена
+        window.location.href = "/admin/dashboard";         // редирект
       } else {
-        const error = await response.json();
-        alert(error.detail || "Ошибка входа");
+        alert(data.detail || "Ошибка входа");
       }
     });
+
   </script>
 </body>
 </html>
