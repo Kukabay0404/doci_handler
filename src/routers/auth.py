@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import HTMLResponse
 from src.schemas.user import UserCreate, UserRead, UserLogin
@@ -41,7 +41,7 @@ async def get_register(request: Request):
     return templates.TemplateResponse("login-admin.html", {"request": request})
 
 @router.post('/login-admin')
-async def login(data: UserLogin, db: AsyncSession = Depends(get_session)):
+async def login(data: UserLogin, response : Response,  db: AsyncSession = Depends(get_session)):
     user = await user_crud.get_user_by_email(data.email, db)
     if not user or not verify_password(data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail='Неверные email или пароль')
@@ -50,4 +50,5 @@ async def login(data: UserLogin, db: AsyncSession = Depends(get_session)):
         raise HTTPException(status_code=403, detail='Доступ разрешён только администраторам')
 
     token = create_access_token({'sub' : str(user.id)})
+    response.set_cookie(key="access_token", value=token, httponly=True)
     return {'access_token' : token, 'token_type' : 'bearer'}

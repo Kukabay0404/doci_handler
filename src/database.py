@@ -1,15 +1,20 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy import StaticPool
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from dotenv import load_dotenv
+
 load_dotenv()
 
 DATABASE_URL = "sqlite+aiosqlite:///./doc.db"
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(DATABASE_URL, echo=True,
+                             connect_args={"check_same_thread": False},
+                             poolclass=StaticPool)
 
 async_session = async_sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase):
     pass
+
 
 async def get_session():
     async with async_session() as session:

@@ -126,7 +126,7 @@
 
   <script>
     // Загрузка статистики - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ С РАБОТАЮЩИМ API
-    /*
+
     async function loadStats() {
       const response = await fetch('/admin/stats', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
@@ -151,10 +151,10 @@
       });
       document.getElementById('recent-docs').innerHTML = html;
     }
-    */
+
 
     // Проверка прав при загрузке - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ
-    /*
+
     async function checkAdmin() {
       try {
         const response = await fetch('/admin/check', {
@@ -165,13 +165,11 @@
         window.location.href = '/auth/login';
       }
     }
-    */
+
 
     // Инициализация - ЗАКОММЕНТИРОВАННЫЙ ВАРИАНТ
-    /*
     checkAdmin();
     loadStats();
-    */
 
     // Демо-данные для просмотра
     document.addEventListener('DOMContentLoaded', () => {

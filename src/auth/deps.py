@@ -1,8 +1,10 @@
 from fastapi import HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer
+from jose import jwt, JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.database import get_session
-from src.auth.jwt_handler import decode_access_token
+from sqlalchemy.orm import Session
+from src.database import get_session, init_db
+from src.auth.jwt_handler import decode_access_token, SECRET_KEY, ALGORITHM
 from src.crud.user import get_user_by_id
 from src.models.user import User
 from src.crud import user as user_crud
@@ -42,3 +44,17 @@ async def admin_required(
         raise HTTPException(status_code=403, detail="Доступ запрещен: не админ")
 
     return user
+
+def get_current_admin_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_session)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            raise HTTPException(status_code=401, detail="Невалидный токен")
+
+        user = db.query(User).filter(User.email == email).first()
+        if not user or not user.is_admin:
+            raise HTTPException(status_code=403, detail="Доступ запрещён")
+        return user
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Невалидный токен")

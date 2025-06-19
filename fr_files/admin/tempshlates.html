@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шаблоны документов | Админ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .sidebar {
+      height: 100vh;
+      background: #212529;
+    }
+    .sidebar .nav-link {
+      color: white;
+    }
+    .sidebar .nav-link.active {
+      background: #495057;
+    }
+    .template-card {
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+    .template-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .upload-area {
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+    }
+    .upload-area:hover {
+      border-color: #0d6efd;
+      background: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Боковое меню -->
+      <nav class="col-md-2 sidebar">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/dashboard">
+                <i class="bi bi-house-door"></i> Главная
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/documents">
+                <i class="bi bi-file-earmark-text"></i> Документы
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin/templates">
+                <i class="bi bi-file-earmark-plus"></i> Шаблоны
+              </a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link text-danger" href="/auth/logout">
+                <i class="bi bi-box-arrow-right"></i> Выйти
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Основной контент -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <div class="d-flex justify-content-between mb-4">
+          <h1 class="h2">Управление шаблонами</h1>
+        </div>
+
+        <!-- Карточка загрузки -->
+        <div class="card mb-4 template-card">
+          <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-upload"></i> Загрузить новый шаблон</h5>
+          </div>
+          <div class="card-body">
+            <form id="upload-form">
+              <div class="upload-area mb-3" id="drop-zone">
+                <i class="bi bi-cloud-arrow-up" style="font-size: 2rem;"></i>
+                <p class="mt-2">Перетащите файл .docx сюда или кликните для выбора</p>
+                <input type="file" class="form-control d-none" id="file-input" accept=".docx" required>
+                <label for="file-input" class="btn btn-primary mt-2">
+                  Выбрать файл
+                </label>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-check-circle"></i> Загрузить
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Список шаблонов -->
+        <div class="card template-card">
+          <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-folder"></i> Доступные шаблоны</h5>
+          </div>
+          <div class="card-body">
+            <div class="list-group" id="templates-list">
+              <!-- Демо-шаблоны -->
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-file-word text-primary"></i>
+                  <span class="ms-2">Шаблон_отпуска.docx</span>
+                </div>
+                <div>
+                  <a href="#" class="btn btn-sm btn-outline-primary me-1">
+                    <i class="bi bi-download"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-file-word text-primary"></i>
+                  <span class="ms-2">Шаблон_увольнения.docx</span>
+                </div>
+                <div>
+                  <a href="#" class="btn btn-sm btn-outline-primary me-1">
+                    <i class="bi bi-download"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+  <script>
+    // ЗАКОММЕНТИРОВАННАЯ ПРОВЕРКА АУТЕНТИФИКАЦИИ
+    async function checkAuth() {
+      try {
+        const response = await fetch('/admin/check', {
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
+        if (!response.ok) window.location.href = '/auth/login';
+      } catch (error) {
+        window.location.href = '/auth/login';
+      }
+    }
+    /*
+    // ЗАКОММЕНТИРОВАННАЯ ЗАГРУЗКА ШАБЛОНОВ
+    async function loadTemplates() {
+      const response = await fetch('/admin/templates', {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
+      const templates = await response.json();
+      
+      let html = '';
+      templates.forEach(tpl => {
+        html += `
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-file-word text-primary"></i>
+              <span class="ms-2">${tpl.filename}</span>
+            </div>
+            <div>
+              <a href="/static/templates/${tpl.filename}" 
+                 class="btn btn-sm btn-outline-primary me-1">
+                <i class="bi bi-download"></i>
+              </a>
+              <button onclick="deleteTemplate('${tpl.filename}')" 
+                      class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('templates-list').innerHTML = html;
+    }
+
+    // ЗАКОММЕНТИРОВАННАЯ ЗАГРУЗКА ФАЙЛА
+    document.getElementById('upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('file', document.getElementById('file-input').files[0]);
+
+      await fetch('/admin/templates', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        body: formData
+      });
+
+      loadTemplates();
+      e.target.reset();
+    });
+
+    async function deleteTemplate(filename) {
+      await fetch(`/admin/templates/${filename}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
+      loadTemplates();
+    }
+
+    checkAuth();
+    loadTemplates();
+    */
+
+    // Демо-режим
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Демо-режим: проверка аутентификации отключена');
+      
+      // Drag and drop для демо
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('file-input');
+      
+      dropZone.addEventListener('click', () => fileInput.click());
+      
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+          dropZone.innerHTML = `
+            <i class="bi bi-file-word text-success" style="font-size: 2rem;"></i>
+            <p class="mt-2">${e.target.files[0].name}</p>
+          `;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
