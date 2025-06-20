@@ -6,18 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="99ca8ad8-3ca1-430b-8038-f9a1a7ad640e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc.db" beforeDir="false" afterPath="$PROJECT_DIR$/doc.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fr_files/admin/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/admin/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fr_files/admin/incdocuments.html" beforeDir="false" afterPath="$PROJECT_DIR$/fr_files/admin/incdocuments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/deps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/jwt_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crud/f_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crud/f_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/doci.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/doci.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/fw_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/fw_docx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/1e2db123d6c5_add_user_id_to_documents.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/versions/1e2db123d6c5_add_user_id_to_documents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/3731b2707c2a_create_documents_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/versions/3731b2707c2a_create_documents_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/e73b0a1f3b7b_create_documents_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/versions/e73b0a1f3b7b_create_documents_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
